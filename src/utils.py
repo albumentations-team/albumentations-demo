@@ -1,9 +1,9 @@
-import cv2
-import os
-import numpy as np
-import json
 import argparse
+import json
+import os
 
+import cv2
+import numpy as np
 import streamlit as st
 
 
@@ -23,14 +23,12 @@ def get_images_list(path_to_folder: str) -> list:
     Args:
         path_to_folder (str): absolute or relative path to the folder with images
     """
-    image_names_list = [
-        x for x in os.listdir(path_to_folder) if x[-3:] in ["jpg", "peg", "png"]
-    ]
+    image_names_list = [x for x in os.listdir(path_to_folder) if x[-3:] in ["jpg", "peg", "png"]]
     return image_names_list
 
 
 @st.cache
-def load_image(image_name: str, path_to_folder: str, bgr2rgb: bool = True):
+def load_image(image_name: str, path_to_folder: str, bgr2rgb: bool = True) -> np.ndarray:
     """Load the image
     Args:
         image_name (str): name of the image
@@ -44,14 +42,12 @@ def load_image(image_name: str, path_to_folder: str, bgr2rgb: bool = True):
     return image
 
 
-def upload_image(bgr2rgb: bool = True):
+def upload_image(bgr2rgb: bool = True) -> np.ndarray:
     """Uoload the image
     Args:
         bgr2rgb (bool): converts BGR image to RGB if True
     """
-    file = st.sidebar.file_uploader(
-        "Upload your image (jpg, jpeg, or png)", ["jpg", "jpeg", "png"]
-    )
+    file = st.sidebar.file_uploader("Upload your image (jpg, jpeg, or png)", ["jpg", "jpeg", "png"])
     image = cv2.imdecode(np.fromstring(file.read(), np.uint8), 1)
     if bgr2rgb:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -59,18 +55,16 @@ def upload_image(bgr2rgb: bool = True):
 
 
 @st.cache
-def load_augmentations_config(
-    placeholder_params: dict, path_to_config: str = "configs/augmentations.json"
-) -> dict:
+def load_augmentations_config(placeholder_params: dict, path_to_config: str = "configs/augmentations.json") -> dict:
     """Load the json config with params of all transforms
     Args:
         placeholder_params (dict): dict with values of placeholders
         path_to_config (str): path to the json config file
     """
-    with open(path_to_config, "r") as config_file:
+    with open(path_to_config) as config_file:
         augmentations = json.load(config_file)
-    for name, params in augmentations.items():
-        params = [fill_placeholders(param, placeholder_params) for param in params]
+    # for name, params in augmentations.items():
+    #     params = [fill_placeholders(param, placeholder_params) for param in params]
     return augmentations
 
 
@@ -80,7 +74,6 @@ def fill_placeholders(params: dict, placeholder_params: dict) -> dict:
         params (dict): original params dict with placeholders
         placeholder_params (dict): dict with values of placeholders
     """
-    # TODO: refactor
     if "placeholder" in params:
         placeholder_dict = params["placeholder"]
         for k, v in placeholder_dict.items():
@@ -105,9 +98,7 @@ def get_params_string(param_values: dict) -> str:
     Args:
         param_values (dict): dict of "param_name" -> "param_value"
     """
-    params_string = ", ".join(
-        [k + "=" + str(param_values[k]) for k in param_values.keys()]
-    )
+    params_string = ", ".join([k + "=" + str(param_values[k]) for k in param_values.keys()])
     return params_string
 
 
@@ -123,18 +114,10 @@ def get_placeholder_params(image):
 def select_transformations(augmentations: dict, interface_type: str) -> list:
     # in the Simple mode you can choose only one transform
     if interface_type == "Simple":
-        transform_names = [
-            st.sidebar.selectbox(
-                "Select a transformation:", sorted(list(augmentations.keys()))
-            )
-        ]
+        transform_names = [st.sidebar.selectbox("Select a transformation:", sorted(list(augmentations.keys())))]
     # in the professional mode you can choose several transforms
     elif interface_type == "Professional":
-        transform_names = [
-            st.sidebar.selectbox(
-                "Select transformation №1:", sorted(list(augmentations.keys()))
-            )
-        ]
+        transform_names = [st.sidebar.selectbox("Select transformation №1:", sorted(list(augmentations.keys())))]
         while transform_names[-1] != "None":
             transform_names.append(
                 st.sidebar.selectbox(
@@ -146,13 +129,11 @@ def select_transformations(augmentations: dict, interface_type: str) -> list:
     return transform_names
 
 
-def show_random_params(data: dict, interface_type: str = "Professional"):
+def show_random_params(data: dict, interface_type: str = "Professional") -> None:
     """Shows random params used for transformation (from A.ReplayCompose)"""
     if interface_type == "Professional":
         st.subheader("Random params used")
         random_values = {}
         for applied_params in data["replay"]["transforms"]:
-            random_values[
-                applied_params["__class_fullname__"].split(".")[-1]
-            ] = applied_params["params"]
+            random_values[applied_params["__class_fullname__"].split(".")[-1]] = applied_params["params"]
         st.write(random_values)
