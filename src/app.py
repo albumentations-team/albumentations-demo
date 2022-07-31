@@ -1,20 +1,16 @@
 import os
-import streamlit as st
+
 import albumentations as A
+import streamlit as st
 
 from utils import (
-    load_augmentations_config,
     get_arguments,
     get_placeholder_params,
+    load_augmentations_config,
     select_transformations,
     show_random_params,
 )
-from visuals import (
-    select_image,
-    show_credentials,
-    show_docstring,
-    get_transormations_params,
-)
+from visuals import get_transormations_params, select_image, show_docstring
 
 
 def main():
@@ -25,9 +21,7 @@ def main():
         st.title("There is no directory: " + path_to_images)
     else:
         # select interface type
-        interface_type = st.sidebar.radio(
-            "Select the interface mode", ["Simple", "Professional"]
-        )
+        interface_type = st.sidebar.radio("Select the interface mode", ["Simple", "Professional"])
 
         # select image
         status, image = select_image(path_to_images, interface_type)
@@ -40,9 +34,7 @@ def main():
             placeholder_params = get_placeholder_params(image)
 
             # load the config
-            augmentations = load_augmentations_config(
-                placeholder_params, "configs/augmentations.json"
-            )
+            augmentations = load_augmentations_config(placeholder_params, "configs/augmentations.json")
 
             # get the list of transformations names
             transform_names = select_transformations(augmentations, interface_type)
@@ -68,9 +60,7 @@ def main():
                 st.title("Demo of Albumentations")
 
                 # show the images
-                width_transformed = int(
-                    width_original / image.shape[1] * augmented_image.shape[1]
-                )
+                width_transformed = int(width_original / image.shape[1] * augmented_image.shape[1])
 
                 st.image(image, caption="Original image", width=width_original)
                 st.image(
@@ -89,22 +79,6 @@ def main():
                 for transform in transforms:
                     show_docstring(transform)
                     st.code(str(transform))
-                show_credentials()
-
-                # adding google analytics pixel
-                # only when deployed online. don't collect statistics of local usage
-                if "GA" in os.environ:
-                    st.image(os.environ["GA"])
-                    st.markdown(
-                        (
-                            "[Privacy policy]"
-                            + (
-                                "(https://htmlpreview.github.io/?"
-                                + "https://github.com/IliaLarchenko/"
-                                + "albumentations-demo/blob/deploy/docs/privacy.html)"
-                            )
-                        )
-                    )
 
 
 if __name__ == "__main__":

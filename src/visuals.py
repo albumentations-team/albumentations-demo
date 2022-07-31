@@ -1,7 +1,6 @@
+import albumentations as A
 import cv2
 import streamlit as st
-
-import albumentations as A
 
 from control import param2func
 from utils import get_images_list, load_image, upload_image
@@ -11,8 +10,8 @@ def show_logo():
     st.image(load_image("logo.png", "../images"), format="PNG")
 
 
-def select_image(path_to_images: str, interface_type: str = "Simple"):
-    """ Show interface to choose the image, and load it
+def select_image(path_to_images, interface_type="Simple"):
+    """Show interface to choose the image, and load it
     Args:
         path_to_images (dict): path ot folder with images
         interface_type (dict): mode of the interface used
@@ -26,28 +25,26 @@ def select_image(path_to_images: str, interface_type: str = "Simple"):
     image_names_list = get_images_list(path_to_images)
     if len(image_names_list) < 1:
         return 1, 0
-    else:
-        if interface_type == "Professional":
-            image_name = st.sidebar.selectbox(
-                "Select an image:", image_names_list + ["Upload my image"]
-            )
-        else:
-            image_name = st.sidebar.selectbox("Select an image:", image_names_list)
 
-        if image_name != "Upload my image":
-            try:
-                image = load_image(image_name, path_to_images)
-                return 0, image
-            except cv2.error:
-                return 1, 0
-        else:
-            try:
-                image = upload_image()
-                return 0, image
-            except cv2.error:
-                return 1, 0
-            except AttributeError:
-                return 2, 0
+    if interface_type == "Professional":
+        image_name = st.sidebar.selectbox("Select an image:", image_names_list + ["Upload my image"])
+    else:
+        image_name = st.sidebar.selectbox("Select an image:", image_names_list)
+
+    if image_name != "Upload my image":
+        try:
+            image = load_image(image_name, path_to_images)
+            return 0, image
+        except cv2.error:
+            return 1, 0
+    else:
+        try:
+            image = upload_image()
+            return 0, image
+        except cv2.error:
+            return 1, 0
+        except AttributeError:
+            return 2, 0
 
 
 def show_transform_control(transform_params: dict, n_for_hash: int) -> dict:
@@ -62,33 +59,9 @@ def show_transform_control(transform_params: dict, n_for_hash: int) -> dict:
                 for name, value in zip(param["param_name"], returned_values):
                     param_values[name] = value
             else:
-                param_values[param["param_name"]] = control_function(
-                    **param, n_for_hash=n_for_hash
-                )
+                param_values[param["param_name"]] = control_function(**param, n_for_hash=n_for_hash)
+
     return param_values
-
-
-def show_credentials():
-    st.markdown("* * *")
-    st.subheader("Credentials:")
-    st.markdown(
-        (
-            "Source: [github.com/IliaLarchenko/albumentations-demo]"
-            "(https://github.com/IliaLarchenko/albumentations-demo)"
-        )
-    )
-    st.markdown(
-        (
-            "Albumentations library: [github.com/albumentations-team/albumentations]"
-            "(https://github.com/albumentations-team/albumentations)"
-        )
-    )
-    st.markdown(
-        (
-            "Image Source: [pexels.com/royalty-free-images]"
-            "(https://pexels.com/royalty-free-images/)"
-        )
-    )
 
 
 def get_transormations_params(transform_names: list, augmentations: dict) -> list:
