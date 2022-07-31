@@ -1,5 +1,7 @@
 # albumentations-demo
 
+Originally developed by Ilya Larchenko at [https://github.com/IliaLarchenko/albumentations-demo](https://github.com/IliaLarchenko/albumentations-demo)
+
 This service is created to demonstrate abilities of the [Albumentations](https://github.com/albumentations-team/albumentations) - a library for efficient image augmentations.
 [Link to my article about augmentations selection and why this service can be useful](https://towardsdatascience.com/explore-image-augmentations-using-a-convenient-tool-a199b4ac8214)
 
@@ -10,15 +12,15 @@ You can play with this service right now [https://albumentations-demo.herokuapp.
 If you would like to run it locally follow the installation instruction.
 
 ## Installation and run
-```
-git clone https://github.com/IliaLarchenko/albumentations-demo
+```bash
+git clone https://github.com/albumentations-team/albumentations-demo
 cd albumentations-demo
 pip install -r requirements.txt
 streamlit run src/app.py
 ```
 
 If you want to work with you own images just replace the last line with:
-```
+```bash
 streamlit run src/app.py -- --image_folder PATH_TO_YOUR_IMAGE_FOLDER
 ```
 
@@ -28,8 +30,8 @@ streamlit run src/app.py -- --image_width INT_VALUE_OF_WIDTH
 ```
 
 
-In your terminal you will see the link to the running local service similar to : 
-```console
+In your terminal you will see the link to the running local service similar to :
+```bash
   You can now view your Streamlit app in your browser.
 
   Network URL: http://YOUR_LOCAL_IP:8501
@@ -39,7 +41,7 @@ Just follow the local link to use the service.
 
 ## Run in docker
 You can run the service in docker:
-```
+```bash
 docker-compose up
 ```
 It will be available at http://DOCKER_HOST_IP:8501
@@ -66,4 +68,4 @@ Be aware that in Professional mode some combination of parameters of different t
 ## Links
 * Albumentations library: [github.com/albumentations-team/albumentations](https://github.com/albumentations-team/albumentations)
 * Image Source: [pexels.com/royalty-free-images](https://pexels.com/royalty-free-images/)
-* Streamlit - framework powering this app [github.com/streamlit/streamlit](https://github.com/streamlit/streamlit)  
+* Streamlit - framework powering this app [github.com/streamlit/streamlit](https://github.com/streamlit/streamlit)
