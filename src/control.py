@@ -1,11 +1,7 @@
 import streamlit as st
 
-# TODO: rename and refactor everything
 
-
-def select_num_interval(
-    param_name: str, limits_list: list, defaults, n_for_hash, **kwargs
-):
+def select_num_interval(param_name, limits_list, defaults, n_for_hash, **kwargs):
     st.sidebar.subheader(param_name)
     min_max_interval = st.sidebar.slider(
         "",
@@ -17,9 +13,7 @@ def select_num_interval(
     return min_max_interval
 
 
-def select_several_nums(
-    param_name, subparam_names, limits_list, defaults_list, n_for_hash, **kwargs
-):
+def select_several_nums(param_name, subparam_names, limits_list, defaults_list, n_for_hash, **kwargs):
     st.sidebar.subheader(param_name)
     result = []
     assert len(limits_list) == len(defaults_list)
@@ -38,15 +32,9 @@ def select_several_nums(
     return tuple(result)
 
 
-def select_min_max(
-    param_name, limits_list, defaults_list, n_for_hash, min_diff=0, **kwargs
-):
+def select_min_max(param_name, limits_list, defaults_list, n_for_hash, min_diff=0, **kwargs):
     assert len(param_name) == 2
-    result = list(
-        select_num_interval(
-            " & ".join(param_name), limits_list, defaults_list, n_for_hash
-        )
-    )
+    result = list(select_num_interval(" & ".join(param_name), limits_list, defaults_list, n_for_hash))
     if result[1] - result[0] < min_diff:
         diff = min_diff - result[1] + result[0]
         if result[1] + diff <= limits_list[1]:
@@ -72,8 +60,8 @@ def select_RGB(param_name, n_for_hash, **kwargs):
 def replace_none(string):
     if string == "None":
         return None
-    else:
-        return string
+
+    return string
 
 
 def select_radio(param_name, options_list, n_for_hash, **kwargs):
@@ -84,10 +72,7 @@ def select_radio(param_name, options_list, n_for_hash, **kwargs):
 
 def select_checkbox(param_name, defaults, n_for_hash, **kwargs):
     st.sidebar.subheader(param_name)
-    result = st.sidebar.checkbox(
-        "True", defaults, key=hash(param_name + str(n_for_hash))
-    )
-    return result
+    return st.sidebar.checkbox("True", defaults, key=hash(param_name + str(n_for_hash)))
 
 
 # dict from param name to function showing this param

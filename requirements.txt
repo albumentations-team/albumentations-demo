@@ -1,2 +1,2 @@
-albumentations==0.4.3
+albumentations==1.2.1
 streamlit==1.11.1
