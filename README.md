@@ -1,5 +1,12 @@
 # albumentations-demo
 
+
+
+# [LINK TO THE APP](https://albumentations-team-albumentations-demo-srcapp-w930cw.streamlitapp.com/)
+
+![](https://habrastorage.org/getpro/habr/upload_files/ce1/a76/a6e/ce1a76a6e8616d25fc3508d3a0a51297.gif)
+
+
 Originally developed by Ilya Larchenko at [https://github.com/IliaLarchenko/albumentations-demo](https://github.com/IliaLarchenko/albumentations-demo)
 
 This service is created to demonstrate abilities of the [Albumentations](https://github.com/albumentations-team/albumentations) - a library for efficient image augmentations.
