@@ -64,7 +64,7 @@ def show_transform_control(transform_params: dict, n_for_hash: int) -> dict:
     return param_values
 
 
-def get_transormations_params(transform_names: list, augmentations: dict) -> list:
+def get_transormations_params(transform_names: list[str], augmentations: dict) -> list:
     transforms = []
     for i, transform_name in enumerate(transform_names):
         # select the params values
