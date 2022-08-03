@@ -63,8 +63,8 @@ def load_augmentations_config(placeholder_params: dict, path_to_config: str = "c
     """
     with open(path_to_config) as config_file:
         augmentations = json.load(config_file)
-    # for name, params in augmentations.items():
-    #     params = [fill_placeholders(param, placeholder_params) for param in params]
+    for _, params in augmentations.items():
+        [fill_placeholders(param, placeholder_params) for param in params]
     return augmentations
 
 
@@ -114,19 +114,18 @@ def get_placeholder_params(image):
 def select_transformations(augmentations: dict, interface_type: str) -> list:
     # in the Simple mode you can choose only one transform
     if interface_type == "Simple":
-        transform_names = [st.sidebar.selectbox("Select a transformation:", sorted(list(augmentations.keys())))]
+        return [st.sidebar.selectbox("Select a transformation:", sorted(list(augmentations.keys())))]
     # in the professional mode you can choose several transforms
-    elif interface_type == "Professional":
-        transform_names = [st.sidebar.selectbox("Select transformation №1:", sorted(list(augmentations.keys())))]
-        while transform_names[-1] != "None":
-            transform_names.append(
-                st.sidebar.selectbox(
-                    f"Select transformation №{len(transform_names) + 1}:",
-                    ["None"] + sorted(list(augmentations.keys())),
-                )
+    # interface_type == "Professional":
+    transform_names = [st.sidebar.selectbox("Select transformation №1:", sorted(list(augmentations.keys())))]
+    while transform_names[-1] != "None":
+        transform_names.append(
+            st.sidebar.selectbox(
+                f"Select transformation №{len(transform_names) + 1}:",
+                ["None"] + sorted(list(augmentations.keys())),
             )
-        transform_names = transform_names[:-1]
-    return transform_names
+        )
+    return transform_names[:-1]
 
 
 def show_random_params(data: dict, interface_type: str = "Professional") -> None:
