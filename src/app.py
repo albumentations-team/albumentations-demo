@@ -1,7 +1,24 @@
 import os
+import cv2
 
 import albumentations as A
 import streamlit as st
+
+if __name__ == "__main__":  # Must be first call of streamlit
+    image = cv2.imread("docs/albumentations_logo.png", cv2.IMREAD_UNCHANGED)
+    image = cv2.cvtColor(image, cv2.COLOR_BGRA2RGBA)
+
+    st.set_page_config(
+        page_title="Albumentations Demo",
+        page_icon=image,
+        menu_items={
+            "Get help": None,
+            "Report a Bug": "https://github.com/albumentations-team/albumentations/issues",
+            "About": "- Main page: https://albumentations.ai/ \n"
+                     "- Documentation: https://albumentations.ai/docs/ \n"
+                     "- Github: https://github.com/albumentations-team/albumentations",
+        }
+    )
 
 from utils import (
     get_arguments,
@@ -57,7 +74,7 @@ def main():
             if error == 0:
                 augmented_image = data["image"]
                 # show title
-                st.title("Demo of Albumentations")
+                st.markdown("# [Demo of Albumentations](https://albumentations.ai/)")
 
                 # show the images
                 width_transformed = int(width_original / image.shape[1] * augmented_image.shape[1])

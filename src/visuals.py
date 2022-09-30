@@ -6,10 +6,6 @@ from control import param2func
 from utils import get_images_list, load_image, upload_image
 
 
-def show_logo():
-    st.image(load_image("logo.png", "../images"), format="PNG")
-
-
 def select_image(path_to_images, interface_type="Simple"):
     """Show interface to choose the image, and load it
     Args:

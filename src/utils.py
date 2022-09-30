@@ -36,6 +36,7 @@ def load_image(image_name: str, path_to_folder: str, bgr2rgb: bool = True) -> np
         image_name (str): name of the image
         path_to_folder (str): path to the folder with image
         bgr2rgb (bool): converts BGR image to RGB if True
+        read_mode (int): OpenCV read image format. Default: IMREAD_COLOR
     """
     path_to_image = os.path.join(path_to_folder, image_name)
     image = cv2.imread(path_to_image)

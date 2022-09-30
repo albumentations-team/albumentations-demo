@@ -2,9 +2,8 @@ import streamlit as st
 
 
 def select_num_interval(param_name, limits_list, defaults, n_for_hash, **kwargs):
-    st.sidebar.subheader(param_name)
     min_max_interval = st.sidebar.slider(
-        "",
+        param_name,
         limits_list[0],
         limits_list[1],
         defaults,
