@@ -156,3 +156,124 @@ Solarize:
   type: num_interval
 ToGray: []
 ToSepia: []
+RandomToneCurve:
+  - defaults: 0.1
+    limits_list: [0.0, 1.0]
+    param_name: scale
+    type: num_interval
+FancyPCA:
+  - defaults: 0.1
+    limits_list: [0.0, 10.0]
+    param_name: alpha
+    type: num_interval
+ColorJitter:
+  - defaults: [0.8, 1.2]
+    limits_list: [0.01, 10.0]
+    param_name: brightness
+    type: num_interval
+  - defaults: [ 0.8, 1.2 ]
+    limits_list: [ 0.01, 10.0 ]
+    param_name: contrast
+    type: num_interval
+  - defaults: [ 0.8, 1.2 ]
+    limits_list: [ 0.01, 10.0 ]
+    param_name: saturation
+    type: num_interval
+  - defaults: [ -0.2, 0.2 ]
+    limits_list: [ -0.5, 0.5 ]
+    param_name: hue
+    type: num_interval
+Sharpen:
+  - defaults: [ 0.2, 0.5 ]
+    limits_list: [ 0.0, 1.0 ]
+    param_name: alpha
+    type: num_interval
+  - defaults: [ 0.5, 1.0 ]
+    limits_list: [ 0.0, 10.0 ]
+    param_name: lightness
+    type: num_interval
+Emboss:
+  - defaults: [ 0.2, 0.5 ]
+    limits_list: [ 0.0, 1.0 ]
+    param_name: alpha
+    type: num_interval
+  - defaults: [ 0.2, 0.7 ]
+    limits_list: [ 0.0, 10.0 ]
+    param_name: strength
+    type: num_interval
+Superpixels:
+  - defaults: 0.1
+    limits_list: [ 0.0, 1.0 ]
+    param_name: p_replace
+    type: num_interval
+  - defaults: 100
+    limits_list: [ 1, 1000 ]
+    param_name: n_segments
+    type: num_interval
+  - defaults: 128
+    limits_list: [ 32, 256 ]
+    param_name: max_size
+    type: num_interval
+  - options_list: [ 0, 1, 2, 3, 4 ]
+    param_name: interpolation
+    type: radio
+RingingOvershoot:
+  - defaults: [7, 15]
+    limits_list: [ 3, 100 ]
+    param_name: blur_limit
+    type: num_interval
+  - defaults: [ 0.7, 1.57 ]
+    limits_list: [ 0.0, 3.14 ]
+    param_name: cutoff
+    type: num_interval
+UnsharpMask:
+  - defaults: [ 3, 7 ]
+    limits_list: [ 1, 100 ]
+    param_name: blur_limit
+    step: 2
+    type: num_interval
+  - defaults: [0.0, 0.0]
+    limits_list: [0.0, 100.0]
+    param_name: sigma_limit
+    type: num_interval
+  - defaults: [ 0.2, 0.5 ]
+    limits_list: [ 0.0, 1.0 ]
+    param_name: alpha
+    type: num_interval
+  - defaults: 10
+    limits_list: [ 0, 255 ]
+    param_name: threshold
+    type: num_interval
+PixelDropout:
+  - defaults: 0.01
+    limits_list: [ 0.0, 1.0 ]
+    param_name: dropout_prob
+    type: num_interval
+  - options_list: [0, 1]
+    param_name: per_channel
+    type: radio
+  - {param_name: drop_value, type: rgb}
+Spatter:
+  - defaults: 0.65
+    limits_list: [ -10.0, 10.0 ]
+    param_name: mean
+    type: num_interval
+  - defaults: 0.3
+    limits_list: [ 0.0, 100.0 ]
+    param_name: std
+    type: num_interval
+  - defaults: 2.0
+    limits_list: [ -10.0, 10.0 ]
+    param_name: gauss_sigma
+    type: num_interval
+  - defaults: 0.68
+    limits_list: [ -10.0, 10.0 ]
+    param_name: cutout_threshold
+    type: num_interval
+  - defaults: 0.6
+    limits_list: [ -10.0, 10.0 ]
+    param_name: intensity
+    type: num_interval
+  - options_list: [ rain, mud ]
+    param_name: mode
+    type: radio
