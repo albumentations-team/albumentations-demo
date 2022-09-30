@@ -31,9 +31,7 @@ def test_load_augmentations_config():
         "image_half_width": int(image.shape[1] / 2),
         "image_half_height": int(image.shape[0] / 2),
     }
-    augmentations = load_augmentations_configs_from_folder(
-        placeholder_params, path_to_config="configs/augmentations.yml"
-    )
+    augmentations = load_augmentations_configs_from_folder(placeholder_params, directory="configs")
 
     for transform_name in augmentations.keys():
         if transform_name in [

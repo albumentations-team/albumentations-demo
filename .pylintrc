@@ -71,7 +71,8 @@ disable=missing-module-docstring,
         invalid-name,
         consider-using-enumerate,
         no-member,
-        expression-not-assigned
+        expression-not-assigned,
+        C0413
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
