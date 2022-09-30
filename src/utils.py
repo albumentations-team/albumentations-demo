@@ -70,6 +70,7 @@ def load_augmentations_config(placeholder_params: dict, path_to_config: str = "c
         [fill_placeholders(param, placeholder_params) for param in params]
     return augmentations
 
+
 @st.cache
 def load_augmentations_configs_from_folder(placeholder_params: dict, directory: str = "configs") -> dict:
     """Load the yaml config with params of all transforms
