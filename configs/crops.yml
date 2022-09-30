@@ -1,3 +1,14 @@
+RandomCrop:
+  - param_name: height
+    placeholder:
+      defaults: image_half_height
+      limits_list: [1, image_height]
+    type: num_interval
+  - param_name: width
+    placeholder:
+      defaults: image_half_width
+      limits_list: [1, image_width]
+    type: num_interval
 CenterCrop:
   - param_name: height
     placeholder:
@@ -67,3 +78,20 @@ RandomSizedCrop:
   - options_list: [0, 1, 2, 3, 4]
     param_name: interpolation
     type: radio
+RandomCropFromBorders:
+  - param_name: crop_left
+    defaults: 0.1
+    limits_list: [0.0, 1.0]
+    type: num_interval
+  - param_name: crop_right
+    defaults: 0.1
+    limits_list: [ 0.0, 1.0 ]
+    type: num_interval
+  - param_name: crop_top
+    defaults: 0.1
+    limits_list: [ 0.0, 1.0 ]
+    type: num_interval
+  - param_name: crop_bottom
+    defaults: 0.1
+    limits_list: [ 0.0, 1.0 ]
+    type: num_interval
