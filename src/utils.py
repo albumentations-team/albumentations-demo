@@ -1,10 +1,12 @@
 import argparse
-import json
+import yaml
 import os
 
 import cv2
 import numpy as np
 import streamlit as st
+
+from pathlib import Path
 
 
 @st.cache
@@ -55,17 +57,29 @@ def upload_image(bgr2rgb: bool = True) -> np.ndarray:
 
 
 @st.cache
-def load_augmentations_config(placeholder_params: dict, path_to_config: str = "configs/augmentations.json") -> dict:
-    """Load the json config with params of all transforms
+def load_augmentations_config(placeholder_params: dict, path_to_config: str = "configs/augmentations.yml") -> dict:
+    """Load the yaml config with params of all transforms
     Args:
         placeholder_params (dict): dict with values of placeholders
-        path_to_config (str): path to the json config file
+        path_to_config (str): path to the yaml config file
     """
     with open(path_to_config) as config_file:
-        augmentations = json.load(config_file)
+        augmentations = yaml.safe_load(config_file)
     for _, params in augmentations.items():
         [fill_placeholders(param, placeholder_params) for param in params]
     return augmentations
+
+@st.cache
+def load_augmentations_configs_from_folder(placeholder_params: dict, directory: str = "configs") -> dict:
+    """Load the yaml config with params of all transforms
+    Args:
+        placeholder_params (dict): dict with values of placeholders
+        directory (str): path to the directory with yaml config files
+    """
+    result = {}
+    for path in Path(directory).rglob("*.yml"):
+        result.update(load_augmentations_config(placeholder_params, str(path)))
+    return result
 
 
 def fill_placeholders(params: dict, placeholder_params: dict) -> dict:

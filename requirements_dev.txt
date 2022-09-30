@@ -4,3 +4,4 @@ isort==5.10.1
 mypy==0.971
 pylint==2.14.5
 pytest==7.1.2
+PyYAML

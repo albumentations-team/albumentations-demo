@@ -6,7 +6,7 @@ import streamlit as st
 from utils import (
     get_arguments,
     get_placeholder_params,
-    load_augmentations_config,
+    load_augmentations_configs_from_folder,
     select_transformations,
     show_random_params,
 )
@@ -34,7 +34,7 @@ def main():
             placeholder_params = get_placeholder_params(image)
 
             # load the config
-            augmentations = load_augmentations_config(placeholder_params, "configs/augmentations.json")
+            augmentations = load_augmentations_configs_from_folder(placeholder_params, "configs")
 
             # get the list of transformations names
             transform_names = select_transformations(augmentations, interface_type)

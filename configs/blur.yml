@@ -1,0 +1,10 @@
+Blur:
+  - defaults: [3, 7]
+    limits_list: [3, 100]
+    param_name: blur_limit
+    type: num_interval
+MotionBlur:
+  - defaults: [3, 7]
+    limits_list: [3, 100]
+    param_name: blur_limit
+    type: num_interval
