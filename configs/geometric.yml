@@ -125,3 +125,75 @@ GridDistortion:
     param_name: border_mode
     type: radio
   - {param_name: value, type: rgb}
+SafeRotate:
+  - defaults: 90
+    limits_list: [0, 360]
+    param_name: limit
+    type: num_interval
+  - {param_name: value, type: rgb}
+  - options_list: [ 0, 1, 2, 3, 4 ]
+    param_name: interpolation
+    type: radio
+  - options_list: [ 0, 1, 2, 3, 4 ]
+    param_name: border_mode
+    type: radio
+Perspective:
+  - defaults: [0.05, 0.1]
+    limits_list: [0.0, 2.0]
+    param_name: scale
+    type: num_interval
+  - options_list: [0, 1]
+    param_name: keep_size
+    type: radio
+  - options_list: [ 0, 1, 2, 3, 4 ]
+    param_name: pad_mode
+    type: radio
+  - {param_name: pad_val, type: rgb}
+  - options_list: [ 0, 1 ]
+    param_name: fit_output
+    type: radio
+  - options_list: [ 0, 1, 2, 3, 4 ]
+    param_name: interpolation
+    type: radio
+PiecewiseAffine:
+  - defaults: [ 0.03, 0.05 ]
+    limits_list: [ 0.0, 100.0 ]
+    param_name: scale
+    type: num_interval
+  - defaults: 4
+    limits_list: [0, 100]
+    param_name: nb_rows
+    type: num_interval
+  - defaults: 4
+    limits_list: [ 0, 100 ]
+    param_name: nb_cols
+    type: num_interval
+  - options_list: [ 0, 1, 2, 3, 4, 5 ]
+    param_name: interpolation
+    type: radio
+  - defaults: 0
+    limits_list: [0, 255]
+    param_name: cval
+    type: num_interval
+  - options_list: [constant, edge, symmetric, reflect, wrap]
+    param_name: mode
+    type: radio
+  - options_list: [0, 1]
+    param_name: absolute_scale
+    type: radio
+PadIfNeeded:
+  - defaults: 1024
+    limits_list: [1, 2048]
+    param_name: min_height
+    type: num_interval
+  - defaults: 1024
+    limits_list: [ 1, 2048 ]
+    param_name: min_width
+    type: num_interval
+  - options_list: [center, top_left, top_right, bottom_left, bottom_right, random]
+    param_name: position
+    type: radio
+  - options_list: [ 0, 1, 2, 3, 4 ]
+    param_name: border_mode
+    type: radio
+  - {param_name: value, type: rgb}
