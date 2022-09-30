@@ -13,7 +13,7 @@ if __name__ == "__main__":  # Must be first call of streamlit
         page_icon=image,
         menu_items={
             "Get help": None,
-            "Report a Bug": "https://github.com/albumentations-team/albumentations/issues",
+            "Report a Bug": "https://github.com/albumentations-team/albumentations-demo/issues/new",
             "About": "- Main page: https://albumentations.ai/ \n"
                      "- Documentation: https://albumentations.ai/docs/ \n"
                      "- Github: https://github.com/albumentations-team/albumentations",
