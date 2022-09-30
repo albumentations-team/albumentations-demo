@@ -1,16 +1,16 @@
 import os
-import cv2
 
 import albumentations as A
+import cv2
 import streamlit as st
 
 if __name__ == "__main__":  # Must be first call of streamlit
-    image = cv2.imread("docs/albumentations_logo.png", cv2.IMREAD_UNCHANGED)
-    image = cv2.cvtColor(image, cv2.COLOR_BGRA2RGBA)
+    logo_image = cv2.imread("docs/albumentations_logo.png", cv2.IMREAD_UNCHANGED)
+    logo_image = cv2.cvtColor(logo_image, cv2.COLOR_BGRA2RGBA)
 
     st.set_page_config(
         page_title="Albumentations Demo",
-        page_icon=image,
+        page_icon=logo_image,
         menu_items={
             "Get help": None,
             "Report a Bug": "https://github.com/albumentations-team/albumentations-demo/issues/new",

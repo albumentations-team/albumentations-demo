@@ -1,12 +1,11 @@
 import argparse
-import yaml
 import os
+from pathlib import Path
 
 import cv2
 import numpy as np
 import streamlit as st
-
-from pathlib import Path
+import yaml
 
 
 @st.cache
