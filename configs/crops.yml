@@ -1,0 +1,97 @@
+RandomCrop:
+  - param_name: height
+    placeholder:
+      defaults: image_half_height
+      limits_list: [1, image_height]
+    type: num_interval
+  - param_name: width
+    placeholder:
+      defaults: image_half_width
+      limits_list: [1, image_width]
+    type: num_interval
+CenterCrop:
+  - param_name: height
+    placeholder:
+      defaults: image_half_height
+      limits_list: [1, image_height]
+    type: num_interval
+  - param_name: width
+    placeholder:
+      defaults: image_half_width
+      limits_list: [1, image_width]
+    type: num_interval
+Crop:
+  - min_diff: 1
+    param_name: [x_min, x_max]
+    placeholder:
+      defaults_list: [0, image_half_width]
+      limits_list: [0, image_width]
+    type: min_max
+  - min_diff: 1
+    param_name: [y_min, y_max]
+    placeholder:
+      defaults_list: [0, image_half_height]
+      limits_list: [0, image_height]
+    type: min_max
+RandomResizedCrop:
+  - param_name: height
+    placeholder:
+      defaults: image_height
+      limits_list: [1, image_height]
+    type: num_interval
+  - param_name: width
+    placeholder:
+      defaults: image_width
+      limits_list: [1, image_width]
+    type: num_interval
+  - defaults: [0.08, 1.0]
+    limits_list: [0.01, 1.0]
+    param_name: scale
+    type: num_interval
+  - defaults: [0.75, 1.3333333333333333]
+    limits_list: [0.1, 10.0]
+    param_name: ratio
+    type: num_interval
+  - options_list: [0, 1, 2, 3, 4]
+    param_name: interpolation
+    type: radio
+RandomSizedCrop:
+  - param_name: min_max_height
+    placeholder:
+      defaults: [image_half_height, image_height]
+      limits_list: [1, image_height]
+    type: num_interval
+  - param_name: height
+    placeholder:
+      defaults: image_height
+      limits_list: [1, image_height]
+    type: num_interval
+  - param_name: width
+    placeholder:
+      defaults: image_width
+      limits_list: [1, image_width]
+    type: num_interval
+  - defaults: 1.0
+    limits_list: [0.1, 1.0]
+    param_name: w2h_ratio
+    type: num_interval
+  - options_list: [0, 1, 2, 3, 4]
+    param_name: interpolation
+    type: radio
+RandomCropFromBorders:
+  - param_name: crop_left
+    defaults: 0.1
+    limits_list: [0.0, 1.0]
+    type: num_interval
+  - param_name: crop_right
+    defaults: 0.1
+    limits_list: [ 0.0, 1.0 ]
+    type: num_interval
+  - param_name: crop_top
+    defaults: 0.1
+    limits_list: [ 0.0, 1.0 ]
+    type: num_interval
+  - param_name: crop_bottom
+    defaults: 0.1
+    limits_list: [ 0.0, 1.0 ]
+    type: num_interval

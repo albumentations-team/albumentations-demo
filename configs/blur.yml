@@ -1,0 +1,87 @@
+Blur:
+  - defaults: [3, 7]
+    limits_list: [1, 100]
+    param_name: blur_limit
+    type: num_interval
+MotionBlur:
+  - defaults: [3, 7]
+    limits_list: [1, 100]
+    param_name: blur_limit
+    type: num_interval
+    step: 2
+MedianBlur:
+  - defaults: [3, 7]
+    limits_list: [1, 100]
+    param_name: blur_limit
+    type: num_interval
+    step: 2
+Defocus:
+  - defaults: [3, 10]
+    limits_list: [1, 100]
+    param_name: radius
+    type: num_interval
+  - defaults: [0.1, 0.5]
+    limits_list: [0.0, 10.0]
+    param_name: alias_blur
+    type: num_interval
+ZoomBlur:
+  - defaults: 1.31
+    limits_list: [1.0, 10.0]
+    param_name: max_factor
+    type: num_interval
+  - defaults: [0.01, 0.03]
+    limits_list: [0.0, 10.0]
+    param_name: step_factor
+    type: num_interval
+GaussianBlur:
+  - defaults: [3, 7]
+    limits_list: [1, 100]
+    param_name: blur_limit
+    type: num_interval
+    step: 2
+  - defaults: 0.0
+    limits_list: [0.0, 100.0]
+    param_name: sigma_limit
+    type: num_interval
+GlassBlur:
+  - defaults: 0.7
+    limits_list: [0.0, 100.0]
+    param_name: sigma
+    type: num_interval
+  - defaults: 4
+    limits_list: [0, 100]
+    param_name: max_delta
+    type: num_interval
+  - defaults: 2
+    limits_list: [1, 100]
+    param_name: iterations
+    type: num_interval
+  - options_list: [fast, exact]
+    param_name: mode
+    type: radio
+AdvancedBlur:
+  - defaults: [3, 7]
+    limits_list: [1, 100]
+    param_name: blur_limit
+    type: num_interval
+    step: 2
+  - defaults: [0.2, 1.0]
+    limits_list: [0.0, 10.0]
+    param_name: sigmaX_limit
+    type: num_interval
+  - defaults: [0.2, 1.0]
+    limits_list: [0.0, 10.0]
+    param_name: sigmaY_limit
+    type: num_interval
+  - defaults: 90
+    limits_list: [0, 360]
+    param_name: rotate_limit
+    type: num_interval
+  - defaults: [0.5, 8.0]
+    limits_list: [0.0, 100.0]
+    param_name: beta_limit
+    type: num_interval
+  - defaults: [0.9, 1.1]
+    limits_list: [0.01, 100.0]
+    param_name: noise_limit
+    type: num_interval
