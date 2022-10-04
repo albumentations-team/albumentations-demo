@@ -3,7 +3,6 @@ import os
 import albumentations as A
 import cv2
 import streamlit as st
-from streamlit.components.v1 import html
 
 if __name__ == "__main__":  # Must be first call of streamlit
     logo_image = cv2.imread("docs/albumentations_logo.png", cv2.IMREAD_UNCHANGED)
@@ -35,8 +34,6 @@ from visuals import get_transormations_params, select_image, show_docstring
 def main():
     # get CLI params: the path to images and image width
     path_to_images, width_original, ga_tracking_id = get_arguments()
-
-    import streamlit as st
 
     if not os.path.isdir(path_to_images):
         st.title("There is no directory: " + path_to_images)
