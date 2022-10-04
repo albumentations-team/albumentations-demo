@@ -26,13 +26,14 @@ from utils import (
     load_augmentations_configs_from_folder,
     select_transformations,
     show_random_params,
+    render_ga_code,
 )
 from visuals import get_transormations_params, select_image, show_docstring
 
 
 def main():
     # get CLI params: the path to images and image width
-    path_to_images, width_original = get_arguments()
+    path_to_images, width_original, ga_tracking_id = get_arguments()
 
     if not os.path.isdir(path_to_images):
         st.title("There is no directory: " + path_to_images)
@@ -96,6 +97,7 @@ def main():
                 for transform in transforms:
                     show_docstring(transform)
                     st.code(str(transform))
+    render_ga_code(ga_tracking_id)
 
 
 if __name__ == "__main__":
