@@ -1,10 +1,12 @@
 import argparse
 import os
 from pathlib import Path
+from string import Template
 
 import cv2
 import numpy as np
 import streamlit as st
+from streamlit.components.v1 import html
 import yaml
 
 
@@ -14,8 +16,10 @@ def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("--image_folder", default="images")
     parser.add_argument("--image_width", default=400, type=int)
+    parser.add_argument("--ga_tracking_id", default="UA-158065353-1")
+
     args = parser.parse_args()
-    return getattr(args, "image_folder"), getattr(args, "image_width")
+    return args.image_folder, args.image_width, args.ga_tracking_id
 
 
 @st.cache
@@ -151,3 +155,17 @@ def show_random_params(data: dict, interface_type: str = "Professional") -> None
         for applied_params in data["replay"]["transforms"]:
             random_values[applied_params["__class_fullname__"].split(".")[-1]] = applied_params["params"]
         st.write(random_values)
+
+
+def render_ga_code(tracking_id):
+    GA_CODE = Template("""
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=$tracking_id"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '$tracking_id');
+    </script>
+    """)
+    return html(GA_CODE.substitute(tracking_id=tracking_id), height=0, width=0)
