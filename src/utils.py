@@ -158,14 +158,16 @@ def show_random_params(data: dict, interface_type: str = "Professional") -> None
 
 
 def render_ga_code(tracking_id):
-    GA_CODE = Template("""
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=$tracking_id"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '$tracking_id');
-    </script>
-    """)
+    GA_CODE = Template(
+        """
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=$tracking_id"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '$tracking_id');
+        </script>
+        """
+    )
     return html(GA_CODE.substitute(tracking_id=tracking_id), height=0, width=0)
