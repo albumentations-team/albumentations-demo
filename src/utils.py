@@ -10,7 +10,7 @@ from streamlit.components.v1 import html
 import yaml
 
 
-@st.cache
+@st.cache_data
 def get_arguments():
     """Return the values of CLI params"""
     parser = argparse.ArgumentParser()
@@ -22,7 +22,7 @@ def get_arguments():
     return args.image_folder, args.image_width, args.ga_tracking_id
 
 
-@st.cache
+@st.cache_data
 def get_images_list(path_to_folder: str) -> list:
     """Return the list of images from folder
     Args:
@@ -32,7 +32,7 @@ def get_images_list(path_to_folder: str) -> list:
     return image_names_list
 
 
-@st.cache
+@st.cache_data
 def load_image(image_name: str, path_to_folder: str, bgr2rgb: bool = True) -> np.ndarray:
     """Load the image
     Args:
@@ -60,7 +60,7 @@ def upload_image(bgr2rgb: bool = True) -> np.ndarray:
     return image
 
 
-@st.cache
+@st.cache_data
 def load_augmentations_config(placeholder_params: dict, path_to_config: str = "configs/augmentations.yml") -> dict:
     """Load the yaml config with params of all transforms
     Args:
@@ -74,7 +74,7 @@ def load_augmentations_config(placeholder_params: dict, path_to_config: str = "c
     return augmentations
 
 
-@st.cache
+@st.cache_data
 def load_augmentations_configs_from_folder(placeholder_params: dict, directory: str = "configs") -> dict:
     """Load the yaml config with params of all transforms
     Args:
