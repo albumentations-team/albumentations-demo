@@ -2,7 +2,7 @@
 
 
 
-# [LINK TO THE APP](https://albumentations-team-albumentations-demo-srcapp-w930cw.streamlitapp.com/)
+# [LINK TO THE APP](https://demo.albumentations.ai/)
 
 ![](https://habrastorage.org/getpro/habr/upload_files/ce1/a76/a6e/ce1a76a6e8616d25fc3508d3a0a51297.gif)
 
