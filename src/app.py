@@ -1,24 +1,7 @@
 import os
 
 import albumentations as A
-import cv2
 import streamlit as st
-
-if __name__ == "__main__":  # Must be first call of streamlit
-    logo_image = cv2.imread("docs/albumentations_logo.png", cv2.IMREAD_UNCHANGED)
-    logo_image = cv2.cvtColor(logo_image, cv2.COLOR_BGRA2RGBA)
-
-    st.set_page_config(
-        page_title="Albumentations Demo",
-        page_icon=logo_image,
-        menu_items={
-            "Get help": None,
-            "Report a Bug": "https://github.com/albumentations-team/albumentations-demo/issues/new",
-            "About": "- Main page: https://albumentations.ai/ \n"
-            "- Documentation: https://albumentations.ai/docs/ \n"
-            "- Github: https://github.com/albumentations-team/albumentations",
-        },
-    )
 
 from utils import (
     get_arguments,
@@ -29,6 +12,18 @@ from utils import (
     render_ga_code,
 )
 from visuals import get_transormations_params, select_image, show_docstring
+
+st.set_page_config(
+    page_title="Albumentations Demo",
+    page_icon="docs/albumentations_logo.png",
+    menu_items={
+        "Get help": None,
+        "Report a bug": "https://github.com/albumentations-team/albumentations-demo/issues/new",
+        "About": "- Main page: [albumentations.ai](https://albumentations.ai) \n"
+                 "- Documentation: [albumentations.ai/docs](https://albumentations.ai/docs) \n"
+                 "- Github: [github.com/albumentations](https://github.com/albumentations-team/albumentations)",
+    },
+)
 
 
 def main():
