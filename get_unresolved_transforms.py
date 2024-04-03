@@ -1,8 +1,9 @@
 import inspect
+import logging
 
 import albumentations
 
-from src.utils import load_augmentations_configs_from_folder
+from src.utils.helpers import load_augmentations_configs_from_folder
 
 IGNORED_CLASSES = {
     "BasicTransform",
@@ -19,16 +20,10 @@ if __name__ == "__main__":
 
     albu_transforms = set()
     for name, cls in inspect.getmembers(albumentations):
-        if (
-            inspect.isclass(cls)
-            and issubclass(cls, albumentations.BasicTransform)
-            and name not in IGNORED_CLASSES
-        ):
-            if "DeprecationWarning" in inspect.getsource(
-                cls
-            ) or "FutureWarning" in inspect.getsource(cls):
+        if inspect.isclass(cls) and issubclass(cls, albumentations.BasicTransform) and name not in IGNORED_CLASSES:
+            if "DeprecationWarning" in inspect.getsource(cls) or "FutureWarning" in inspect.getsource(cls):
                 continue
             albu_transforms.add(name)
 
     for i, name in enumerate(albu_transforms - resolved_transforms):
-        print(i, name)
+        logging.info(i, name)
