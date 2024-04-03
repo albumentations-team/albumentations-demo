@@ -1,17 +1,18 @@
-import os
+from pathlib import Path
 
-import albumentations as A
+import albumentations
 import streamlit as st
-
-from utils import (
+from utils.helpers import (
     get_arguments,
     get_placeholder_params,
     load_augmentations_configs_from_folder,
+    render_ga_code,
     select_transformations,
     show_random_params,
-    render_ga_code,
 )
-from visuals import get_transormations_params, select_image, show_docstring
+from visuals import get_transformations_params, select_image, show_docstring
+
+from src.utils.constants import STATUS_CODE_LOAD_ERROR, STATUS_CODE_NO_IMAGE
 
 st.set_page_config(
     page_title="Albumentations Demo",
@@ -20,50 +21,56 @@ st.set_page_config(
         "Get help": None,
         "Report a bug": "https://github.com/albumentations-team/albumentations-demo/issues/new",
         "About": "- Main page: [albumentations.ai](https://albumentations.ai) \n"
-                 "- Documentation: [albumentations.ai/docs](https://albumentations.ai/docs) \n"
-                 "- Github: [github.com/albumentations](https://github.com/albumentations-team/albumentations)",
+        "- Documentation: [albumentations.ai/docs](https://albumentations.ai/docs) \n"
+        "- Github: [github.com/albumentations](https://github.com/albumentations-team/albumentations)",
     },
 )
 
 
-def main():
+def main() -> None:
     # get CLI params: the path to images and image width
     path_to_images, width_original, ga_tracking_id = get_arguments()
 
-    if not os.path.isdir(path_to_images):
+    if not Path(path_to_images).is_dir():
         st.title("There is no directory: " + path_to_images)
     else:
         # select interface type
-        interface_type = st.sidebar.radio("Select the interface mode", ["Simple", "Professional"])
+        interface_type = st.sidebar.radio(
+            "Select the interface mode",
+            ["Simple", "Professional"],
+        )
 
         # select image
         status, image = select_image(path_to_images, interface_type)
-        if status == 1:
+        if status == STATUS_CODE_LOAD_ERROR:
             st.title("Can't load image")
-        if status == 2:
+        if status == STATUS_CODE_NO_IMAGE:
             st.title("Please, upload the image")
         else:
             # image was loaded successfully
             placeholder_params = get_placeholder_params(image)
 
             # load the config
-            augmentations = load_augmentations_configs_from_folder(placeholder_params, "configs")
+            augmentations = load_augmentations_configs_from_folder(
+                placeholder_params,
+                "configs",
+            )
 
             # get the list of transformations names
             transform_names = select_transformations(augmentations, interface_type)
 
             # get parameters for each transform
-            transforms = get_transormations_params(transform_names, augmentations)
+            transforms = get_transformations_params(transform_names, augmentations)
 
             try:
                 # apply the transformation to the image
-                data = A.ReplayCompose(transforms)(image=image)
+                data = albumentations.ReplayCompose(transforms)(image=image)
                 error = 0
             except ValueError:
                 error = 1
                 st.title(
                     "The error has occurred. Most probably you have passed wrong set of parameters. \
-                Check transforms that change the shape of image."
+                Check transforms that change the shape of image.",
                 )
 
             # proceed only if everything is ok
@@ -73,7 +80,9 @@ def main():
                 st.markdown("# [Demo of Albumentations](https://albumentations.ai/)")
 
                 # show the images
-                width_transformed = int(width_original / image.shape[1] * augmented_image.shape[1])
+                width_transformed = int(
+                    width_original / image.shape[1] * augmented_image.shape[1],
+                )
 
                 st.image(image, caption="Original image", width=width_original)
                 st.image(
