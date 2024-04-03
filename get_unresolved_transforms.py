@@ -1,4 +1,5 @@
 import inspect
+
 import albumentations
 
 from src.utils import load_augmentations_configs_from_folder
@@ -18,8 +19,14 @@ if __name__ == "__main__":
 
     albu_transforms = set()
     for name, cls in inspect.getmembers(albumentations):
-        if inspect.isclass(cls) and issubclass(cls, albumentations.BasicTransform) and name not in IGNORED_CLASSES:
-            if "DeprecationWarning" in inspect.getsource(cls) or "FutureWarning" in inspect.getsource(cls):
+        if (
+            inspect.isclass(cls)
+            and issubclass(cls, albumentations.BasicTransform)
+            and name not in IGNORED_CLASSES
+        ):
+            if "DeprecationWarning" in inspect.getsource(
+                cls
+            ) or "FutureWarning" in inspect.getsource(cls):
                 continue
             albu_transforms.add(name)
 
