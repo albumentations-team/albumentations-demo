@@ -44,6 +44,12 @@ exclude = [
     "setup.py",
     "tools",
 ]
+ignore = [
+    "D100",
+    "D103",
+    "D415",
+    "D205",
+]
 
 line-length = 120
 indent-width = 4
