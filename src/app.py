@@ -2,6 +2,7 @@ from pathlib import Path
 
 import albumentations
 import streamlit as st
+from utils.constants import STATUS_CODE_LOAD_ERROR, STATUS_CODE_NO_IMAGE
 from utils.helpers import (
     get_arguments,
     get_placeholder_params,
@@ -11,8 +12,6 @@ from utils.helpers import (
     show_random_params,
 )
 from visuals import get_transformations_params, select_image, show_docstring
-
-from src.utils.constants import STATUS_CODE_LOAD_ERROR, STATUS_CODE_NO_IMAGE
 
 st.set_page_config(
     page_title="Albumentations Demo",
