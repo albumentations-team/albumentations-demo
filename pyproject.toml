@@ -45,7 +45,9 @@ exclude = [
     "tools",
 ]
 ignore = [
+    "COM812",
     "INP001",
+    "ISC001",
     "D100",
     "D103",
     "D104",
