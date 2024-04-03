@@ -45,11 +45,14 @@ exclude = [
     "tools",
 ]
 ignore = [
+    "INP001",
     "D100",
     "D103",
     "D104",
     "D415",
     "D205",
+    "FBT001",
+    "FBT002",
 ]
 
 line-length = 120
