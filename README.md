@@ -1,8 +1,8 @@
-# albumentations-demo
+# Albumentations Demo
 
+[![Albumentations Demo App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://demo.albumentations.ai/)
 
-
-# [LINK TO THE APP](https://demo.albumentations.ai/)
+---
 
 ![](https://habrastorage.org/getpro/habr/upload_files/ce1/a76/a6e/ce1a76a6e8616d25fc3508d3a0a51297.gif)
 
