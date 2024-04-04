@@ -3,7 +3,7 @@
 import albumentations as A
 import numpy as np
 
-from src.utils import get_images_list, load_augmentations_configs_from_folder, load_image
+from src.utils.helpers import get_images_list, load_augmentations_configs_from_folder, load_image
 
 
 def test_get_images_list():

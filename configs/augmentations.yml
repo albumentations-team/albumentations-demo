@@ -46,11 +46,6 @@ ImageCompression:
   param_name: [quality_lower, quality_upper]
   type: min_max
 InvertImg: []
-JpegCompression:
-- defaults_list: [80, 100]
-  limits_list: [0, 100]
-  param_name: [quality_lower, quality_upper]
-  type: min_max
 Posterize:
 - defaults_list: [4, 4, 4]
   limits_list:
@@ -73,11 +68,6 @@ RGBShift:
   limits_list: [-255, 255]
   param_name: b_shift_limit
   type: num_interval
-RandomBrightness:
-- defaults: [-0.2, 0.2]
-  limits_list: [-1.0, 1.0]
-  param_name: limit
-  type: num_interval
 RandomBrightnessContrast:
 - defaults: [-0.2, 0.2]
   limits_list: [-1.0, 1.0]
@@ -88,11 +78,6 @@ RandomBrightnessContrast:
   param_name: contrast_limit
   type: num_interval
 - {defaults: 1, param_name: brightness_by_max, type: checkbox}
-RandomContrast:
-- defaults: [-0.2, 0.2]
-  limits_list: [-1.0, 1.0]
-  param_name: limit
-  type: num_interval
 RandomFog:
 - defaults_list: [0.1, 0.2]
   limits_list: [0.0, 1.0]

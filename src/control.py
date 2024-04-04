@@ -1,8 +1,16 @@
 import streamlit as st
+from streamlit.elements.widgets.slider import SliderReturn
 
 
-def select_num_interval(param_name, limits_list, defaults, n_for_hash, step=None, **kwargs):
-    min_max_interval = st.sidebar.slider(
+def select_num_interval(
+    param_name: str,
+    limits_list: list[list[int]],
+    defaults: list[int],
+    n_for_hash: int,
+    step: float | None = None,
+    **_: int,
+) -> SliderReturn:
+    return st.sidebar.slider(
         param_name,
         limits_list[0],
         limits_list[1],
@@ -10,16 +18,25 @@ def select_num_interval(param_name, limits_list, defaults, n_for_hash, step=None
         step=step,
         key=hash(param_name + str(n_for_hash)),
     )
-    return min_max_interval
 
 
-def select_several_nums(param_name, subparam_names, limits_list, defaults_list, n_for_hash, **kwargs):
+def select_several_nums(
+    param_name: str,
+    subparam_names: list[str],
+    limits_list: list[list[int]],
+    defaults_list: list[int],
+    n_for_hash: int,
+    **_: int,
+) -> tuple[SliderReturn]:
     st.sidebar.subheader(param_name)
     result = []
-    assert len(limits_list) == len(defaults_list)
-    assert len(subparam_names) == len(defaults_list)
 
-    for name, limits, defaults in zip(subparam_names, limits_list, defaults_list):
+    for name, limits, defaults in zip(
+        subparam_names,
+        limits_list,
+        defaults_list,
+        strict=False,
+    ):
         result.append(
             st.sidebar.slider(
                 name,
@@ -27,14 +44,27 @@ def select_several_nums(param_name, subparam_names, limits_list, defaults_list, 
                 limits[1],
                 defaults,
                 key=hash(param_name + name + str(n_for_hash)),
-            )
+            ),
         )
     return tuple(result)
 
 
-def select_min_max(param_name, limits_list, defaults_list, n_for_hash, min_diff=0, **kwargs):
-    assert len(param_name) == 2
-    result = list(select_num_interval(" & ".join(param_name), limits_list, defaults_list, n_for_hash))
+def select_min_max(
+    param_name: str,
+    limits_list: list[list[int]],
+    defaults_list: list[int],
+    n_for_hash: int,
+    min_diff: int = 0,
+    **_: int,
+) -> tuple[SliderReturn]:
+    result = list(
+        select_num_interval(
+            " & ".join(param_name),
+            limits_list,
+            defaults_list,
+            n_for_hash,
+        ),
+    )
     if result[1] - result[0] < min_diff:
         diff = min_diff - result[1] + result[0]
         if result[1] + diff <= limits_list[1]:
@@ -46,7 +76,7 @@ def select_min_max(param_name, limits_list, defaults_list, n_for_hash, min_diff=
     return tuple(result)
 
 
-def select_RGB(param_name, n_for_hash, **kwargs):
+def select_rgb(param_name: str, n_for_hash: int, **_: int) -> tuple[SliderReturn]:
     result = select_several_nums(
         param_name,
         subparam_names=["Red", "Green", "Blue"],
@@ -57,20 +87,19 @@ def select_RGB(param_name, n_for_hash, **kwargs):
     return tuple(result)
 
 
-def replace_none(string):
+def replace_none(string: str) -> str | None:
     if string == "None":
         return None
-
     return string
 
 
-def select_radio(param_name, options_list, n_for_hash, **kwargs):
+def select_radio(param_name: str, options_list: list[int], n_for_hash: int, **_: int) -> str | None:
     st.sidebar.subheader(param_name)
     result = st.sidebar.radio("", options_list, key=hash(param_name + str(n_for_hash)))
     return replace_none(result)
 
 
-def select_checkbox(param_name, defaults, n_for_hash, **kwargs):
+def select_checkbox(param_name: str, defaults: list[int], n_for_hash: int, **_: int) -> bool:
     st.sidebar.subheader(param_name)
     return st.sidebar.checkbox("True", defaults, key=hash(param_name + str(n_for_hash)))
 
@@ -80,7 +109,7 @@ param2func = {
     "num_interval": select_num_interval,
     "several_nums": select_several_nums,
     "radio": select_radio,
-    "rgb": select_RGB,
+    "rgb": select_rgb,
     "checkbox": select_checkbox,
     "min_max": select_min_max,
 }
