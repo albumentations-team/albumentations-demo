@@ -8,3 +8,4 @@ tomli>=2.0.1
 types-pkg-resources
 types-PyYAML
 types-setuptools
+watchdog==4.0.0
