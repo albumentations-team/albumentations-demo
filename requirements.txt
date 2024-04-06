@@ -1,3 +1,3 @@
 albumentations==1.4.3
 PyYAML
-streamlit==1.32.2
+streamlit==1.33.0
