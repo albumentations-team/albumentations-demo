@@ -17,7 +17,7 @@ def get_arguments() -> tuple[str, int, str]:
     parser = argparse.ArgumentParser()
     parser.add_argument("--image_folder", default="images")
     parser.add_argument("--image_width", default=400, type=int)
-    parser.add_argument("--ga_tracking_id", default="UA-158065353-1")
+    parser.add_argument("--ga_tracking_id", default="G-F7EVZZ2ZTJ")
 
     args = parser.parse_args()
     return args.image_folder, args.image_width, args.ga_tracking_id
