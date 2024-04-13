@@ -10,8 +10,7 @@
 
 ![](https://habrastorage.org/getpro/habr/upload_files/ce1/a76/a6e/ce1a76a6e8616d25fc3508d3a0a51297.gif)
 
-Originally developed by Ilya Larchenko
-at [https://github.com/IliaLarchenko/albumentations-demo](https://github.com/IliaLarchenko/albumentations-demo)
+Originally developed by Albumentations Team
 
 This service is created to demonstrate abilities of
 the [Albumentations](https://github.com/albumentations-team/albumentations) - a library for efficient image
@@ -20,9 +19,7 @@ augmentations.
 
 ## Easy start
 
-You can play with this service right
-now [https://albumentations-demo.herokuapp.com/](https://albumentations-demo.herokuapp.com/)
-(It is deployed on free service with very limited computing power and can be quite unstable)
+You can play with this service right now [demo.albumentations.ai](https://demo.albumentations.ai/)
 
 If you would like to run it locally follow the installation instruction.
 
