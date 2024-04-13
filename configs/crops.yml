@@ -78,6 +78,17 @@ RandomSizedCrop:
   - options_list: [0, 1, 2, 3, 4]
     param_name: interpolation
     type: radio
+CropAndPad:
+  - defaults: 0.1
+    limits_list: [ -1., 1. ]
+    param_name: percent
+    type: num_interval
+  - defaults: 1
+    param_name: keep_size
+    type: checkbox
+  - defaults: 1
+    param_name: sample_independently
+    type: checkbox
 RandomCropFromBorders:
   - param_name: crop_left
     defaults: 0.1
