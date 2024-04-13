@@ -58,3 +58,6 @@ target/
 
 .ipynb_checkpoints
 \.idea
+
+# streamlit
+secrets.toml
