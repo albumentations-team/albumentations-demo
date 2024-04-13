@@ -35,27 +35,28 @@ def test_load_augmentations_config():
     augmentations = load_augmentations_configs_from_folder(placeholder_params, directory="configs")
 
     for transform_name in augmentations.keys():
-        if transform_name in [
-            "CenterCrop",
-            "RandomCrop",
-            "RandomResizedCrop",
-            "Resize",
-        ]:
-            param_values = {"p": 1.0, "height": 10, "width": 10}
-        elif transform_name in ["RandomSizedCrop"]:
-            param_values = {
-                "p": 1.0,
-                "height": 10,
-                "width": 10,
-                "min_max_height": (50, 50),
-            }
-        elif transform_name in ["Crop"]:
-            param_values = {"p": 1.0, "x_max": 10, "y_max": 10}
-        else:
-            param_values = {"p": 1.0}
+        param_values = dict(p=1.0)
+        size = (10, 10)
+
+        match transform_name:
+            case "CenterCrop" | "RandomCrop" | "Resize":
+                param_values.update(height=10, width=10)
+            case "CropAndPad":
+                param_values.update(px=10)
+            case "RandomResizedCrop":
+                param_values.update(size=size)
+            case "RandomSizedCrop":
+                param_values.update(size=size, min_max_height=(50, 50))
+            case "Crop":
+                param_values.update(x_max=10, y_max=10)
+            case _:
+                ...
+
         transform = getattr(A, transform_name)(**param_values)
         transformed_image = transform(image=image)["image"]
-        assert len(transformed_image.shape) == 3, f"error in {str(transform)}"
-        assert transformed_image.shape[2] == 3, f"error in {str(transform)}"
-        assert transformed_image.max() <= 255, f"error in {str(transform)}"
-        assert transformed_image.min() >= 0, f"error in {str(transform)}"
+
+        assert_msg = f"error in {str(transform)}"
+        assert len(transformed_image.shape) == 3, assert_msg
+        assert transformed_image.shape[2] == 3, assert_msg
+        assert transformed_image.max() <= 255, assert_msg
+        assert transformed_image.min() >= 0, assert_msg
