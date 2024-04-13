@@ -24,7 +24,8 @@ def test_load_image():
 
 
 def test_load_augmentations_config():
-    image = np.random.randint(0, 255, (100, 100, 3)).astype(np.uint8)
+    rng = np.random.default_rng(seed=42)
+    image = rng.integers(low=0, high=255, size=(100, 100, 3)).astype(np.uint8)
     placeholder_params = {
         "image_width": image.shape[1],
         "image_height": image.shape[0],
